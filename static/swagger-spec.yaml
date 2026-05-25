@@ -1,0 +1,458 @@
+openapi: 3.0.0
+info:
+  title: Wame
+  version: 1.0.0
+  description: >-
+    # 🚀 Usage Instructions
+    [<img src="https://run.pstmn.io/button.svg" align="right" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/28585114-a3f08b85-8594-4343-8064-b92f457295d7?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D28585114-a3f08b85-8594-4343-8064-b92f457295d7%26entityType%3Dcollection%26workspaceId%3Dd99f5252-08c7-4c76-9dc4-09674e9ee3fa)
+
+    > A quick and simple guide to get started with messaging using **Wame**. 
+
+    - **Note:** To follow these steps ensure you grabbed your **API Key** on the **`Dashboard`** page to use as the **`X-API-Key`** header in all requests.
+    
+
+    ---
+
+
+    ## 💡 Step 1: Create a Session
+
+
+    Think of it like opening a **WhatsApp Web** tab in your browser — once
+    connected, you can start sending messages.
+
+
+    - Use **`Session > Create Session`**
+        
+    - Pass your authentication token in the header: `X-API-Key`
+        
+
+    📬 The session will be randomly generated and returned in the response body.
+
+
+    ---
+
+
+    ## 🔑 Step 2: Authenticate
+
+
+    Now let’s link your **phone** to the session. You have two options:
+
+
+    1. **Scan a QR Code** → `Auth > Get Qr`
+        
+    2. **Use a Request Code** → `Auth > Get Request Code`
+        
+
+    In both cases, you must send the `Session` in the headers.
+
+
+    ---
+
+
+    ## 💬 Step 3: Start Messaging
+
+
+    🎉 That’s it — your setup is complete!  
+
+    Now you can send:
+
+
+    - 📝 **Text**→ `Messaging > Send Text`
+        
+    - 📁 **Files** → `Messaging > Send File`
+        
+    - 🖼️ **Images** → `Messaging > Send Image`
+        
+    - 🎬 **Videos** → `Messaging > Send Video`
+        
+
+    👉 All messaging requests follow the same pattern:
+
+
+    - Include `Session` and `X-API-Key` in the headers
+        
+    - Define the JSON request body with the **destination number, content, and
+    required fields**
+        
+
+    ---
+
+
+    ✨ You’re now ready to integrate messaging seamlessly with **Wame**!
+servers:
+  - url: http://wameapi.com:5055
+paths:
+  /api/session:
+    post:
+      summary: Create Session
+      tags:
+        - Session
+      parameters:
+        - name: X-API-Key
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Create Session
+          headers:
+            Date:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session:
+                    type: string
+                  number:
+                    type: string
+                  status:
+                    type: string
+    get:
+      summary: Get Session
+      tags:
+        - Session
+      parameters:
+        - name: X-API-Key
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Session
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get Session
+          headers:
+            Date:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session:
+                    type: string
+                  number:
+                    type: string
+                  status:
+                    type: string
+    delete:
+      summary: Remove session
+      tags:
+        - Session
+      parameters:
+        - name: X-API-Key
+          in: header
+          schema:
+            type: string
+        - name: Session
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Remove session
+          headers:
+            Date:
+              schema:
+                type: string
+            Content-Length:
+              schema:
+                type: integer
+  /api/sessions:
+    get:
+      summary: Get Sessions
+      tags:
+        - Session
+      parameters:
+        - name: X-API-Key
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get Sessions
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    session:
+                      type: string
+                    number:
+                      type: string
+                      format: email
+                    status:
+                      type: string
+  /api/auth/qr:
+    get:
+      summary: Get Qr
+      tags:
+        - Auth
+      parameters:
+        - name: X-API-Key
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Session
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Format
+          in: header
+          required: false
+          description: >-
+            You can set this header to receive a base64 string insthead of an
+            image
+          deprecated: false
+          schema: {}
+      responses:
+        '200':
+          description: Get Qr
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+  /api/auth/code:
+    post:
+      summary: Get Receive Code
+      tags:
+        - Auth
+      parameters:
+        - name: X-API-Key
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Session
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses:
+        '200':
+          description: Get Receive Code
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phoneNumber:
+                  type: string
+  /api/send/text:
+    post:
+      summary: Send Text
+      tags:
+        - Messaging
+      parameters:
+        - name: X-API-Key
+          in: header
+          schema:
+            type: string
+        - name: Session
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Send Text
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                to:
+                  type: string
+  /api/send/file:
+    post:
+      summary: Send File
+      tags:
+        - Messaging
+      parameters:
+        - name: X-API-Key
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Session
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses:
+        '200':
+          description: Send File
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                caption:
+                  type: string
+                file:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    mimetype:
+                      type: string
+                    url:
+                      type: string
+                      format: uri
+                    data:
+                      type: string
+  /api/send/image:
+    post:
+      summary: Send Image
+      tags:
+        - Messaging
+      parameters:
+        - name: X-API-Key
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+        - name: Session
+          in: header
+          required: false
+          deprecated: false
+          schema: {}
+      responses:
+        '200':
+          description: Send Image
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                caption:
+                  type: string
+                file:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    mimetype:
+                      type: string
+                    url:
+                      type: string
+                      format: uri
+                    data:
+                      type: string
+  /api/send/video:
+    post:
+      summary: Send Video
+      tags:
+        - Messaging
+      parameters:
+        - name: X-API-Key
+          in: header
+          schema:
+            type: string
+        - name: Session
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Send Video
+          headers:
+            Date:
+              deprecated: false
+              schema: {}
+            Content-Length:
+              deprecated: false
+              schema: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                caption:
+                  type: string
+                file:
+                  type: object
+                  properties:
+                    filename:
+                      type: string
+                    mimetype:
+                      type: string
+                    url:
+                      type: string
+                      format: uri
+                    data:
+                      type: string

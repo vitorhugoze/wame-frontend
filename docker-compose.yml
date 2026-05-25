@@ -1,0 +1,45 @@
+services:
+  wame_client:
+    image: wame_client
+    container_name: wame_client
+    build:
+      context: .
+      args:
+        - PUBLIC_STRIPE_KEY=${PUBLIC_STRIPE_KEY}
+        - SECRET_STRIPE_KEY=${SECRET_STRIPE_KEY}
+        - PUBLIC_FRONTEND_URL=${PUBLIC_FRONTEND_URL}
+        - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+        - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+        - DB_CONN_STR=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+        - MAIL_HOST=${MAIL_HOST}
+        - MAIL_USER=${MAIL_USER}
+        - MAIL_PASS=${MAIL_PASS}
+        - MAIL_PORT=${MAIL_PORT}
+        - PUBLIC_FREE_TRIAL_PRICE_ID=${PUBLIC_FREE_TRIAL_PRICE_ID}
+        - PUBLIC_STANDARD_PRICE_ID=${PUBLIC_STANDARD_PRICE_ID}
+        - PUBLIC_ADVANCED_PRICE_ID=${PUBLIC_ADVANCED_PRICE_ID}
+        - PUBLIC_PRO_PRICE_ID=${PUBLIC_PRO_PRICE_ID}
+        - FREE_TRIAL_PRICE_ID=${FREE_TRIAL_PRICE_ID}
+        - STANDARD_PRICE_ID=${STANDARD_PRICE_ID}
+        - ADVANCED_PRICE_ID=${ADVANCED_PRICE_ID}
+        - PRO_PRICE_ID=${PRO_PRICE_ID}
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PUBLIC_STRIPE_KEY=${PUBLIC_STRIPE_KEY}
+      - SECRET_STRIPE_KEY=${SECRET_STRIPE_KEY}
+      - PUBLIC_FRONTEND_URL=${PUBLIC_FRONTEND_URL}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+      - DB_CONN_STR=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_USER=${MAIL_USER}
+      - MAIL_PASS=${MAIL_PASS}
+      - MAIL_PORT=${MAIL_PORT}
+    networks:
+      - bridge_network
+
+networks:
+  bridge_network:
+    external: true

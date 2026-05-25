@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import 'tailwindcss';
+@plugin "daisyui";
+
+
+/* Hides a section on documentation */
+.scheme-container {
+    background: transparent !important;
+}
+
+@theme {
+    --font-alata: "Alata", sans-serif;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: false;
+    prefersdark: false;
+    color-scheme: "dark";
+    --color-base-100: #FDF3E2;
+    --color-base-200: #DFD6C7;
+    --color-base-300: #b7afa0;
+    --color-base-content: #090909;
+    --color-primary: oklch(37% 0 0);
+    --color-primary-content: oklch(98% 0.003 247.858);
+    --color-secondary: #0D1E31;
+    --color-secondary-content: #ffffff;
+    --color-accent: #E86317;
+    --color-accent-content: oklch(98% 0.003 247.858);
+    --color-neutral: oklch(98% 0.016 73.684);
+    --color-neutral-content: #000000;
+    --color-info: #7007e7;
+    --color-info-content: oklch(97% 0.013 236.62);
+    --color-success: oklch(72% 0.219 149.579);
+    --color-success-content: oklch(98% 0.018 155.826);
+    --color-warning: oklch(76% 0.188 70.08);
+    --color-warning-content: oklch(98% 0.022 95.277);
+    --color-error: oklch(64% 0.246 16.439);
+    --color-error-content: oklch(96% 0.015 12.422);
+    --radius-selector: 0.5rem;
+    --radius-field: 0rem;
+    --radius-box: 0rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1.5px;
+    --depth: 0;
+    --noise: 1;
+  }
