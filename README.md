@@ -1,38 +1,27 @@
-# sv
+# WAME — WhatsApp API SaaS
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+SaaS completo para automação de mensagens via WhatsApp, desenvolvido para aplicar na prática conhecimentos conceituais em um cenário real — cobrindo desde o provisionamento de infraestrutura na Oracle Cloud até integração de pagamentos e pipelines de CI/CD.
 
-## Creating a project
+## 🔥 O que este projeto faz
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Interface responsiva em **SvelteKit** + **TailwindCSS** + **DaisyUI**
+- Autenticação de usuário com **Better Auth** (email/senha) e reset de senha via **Nodemailer**
+- Checkout e gestão de assinaturas com **Stripe**
+- Dashboard de assinaturas e geração de token de API
+- Backend em **Golang** para processamento e integração com WhatsApp
+- Documentação de API integrada via **Swagger UI** em `/docs`
+- Banco de dados **PostgreSQL** via pool de conexões
+- Infraestrutura provisionada na **Oracle Cloud**
+- Pipeline de CI/CD com **Jenkins** e containers **Docker**
 
-```sh
-# create a new project in the current directory
-npx sv create
+## ⚙️ Stack
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+| Camada        | Tecnologia                        |
+|---------------|-----------------------------------|
+| Frontend      | SvelteKit, TailwindCSS, DaisyUI   |
+| Backend       | Golang                            |
+| Banco de dados| PostgreSQL                        |
+| Pagamentos    | Stripe                            |
+| Cloud         | Oracle Cloud                      |
+| CI/CD         | Jenkins, Docker                   |
+| Extras        | GSAP, Lenis, Nodemailer, Swagger  |
