@@ -1,5 +1,7 @@
 # WAME — WhatsApp API SaaS
 
+Backend do projeto: https://github.com/vitorhugoze/wame
+
 SaaS completo para automação de mensagens via WhatsApp, desenvolvido para aplicar na prática conhecimentos conceituais em um cenário real — cobrindo desde o provisionamento de infraestrutura na Oracle Cloud até integração de pagamentos e pipelines de CI/CD.
 
 ## 🔥 O que este projeto faz
